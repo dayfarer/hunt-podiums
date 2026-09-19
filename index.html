@@ -90,7 +90,7 @@ const D=[
 [2022,"HSe4UwtagAAO8O3","HSe4YhbaAAAaAio","2100850488250106065","Ornate brown mansion with palm trees.","In the <b>grassy garden beside the mansion</b>, behind the palms."],
 [2024,"HSe5PP-bcAAxeov","HSe5UjLacAA-R0W","2100851517448470858","Stage with lighting trusses and a slanted white wall.","In a <b>narrow white corridor</b> behind the wall panels."],
 [2025,"HSe5jmqbEAAqeiZ","HSe5tgAbkAAMbEJ","2100851948396355812","Pine forest with grey boulders.","In the grass <b>under the big tree and rock overhang</b>."]];
-const img=(id,s)=>`https://pbs.twimg.com/media/${id}?format=jpg&name=${s}`;
+const img=(y,k,sm)=>`img/${y}-${k}${sm?'-sm':''}.jpg`;
 let found={};try{found=JSON.parse(localStorage.getItem('podiums')||'{}')}catch(e){}
 const save=()=>{try{localStorage.setItem('podiums',JSON.stringify(found))}catch(e){}};
 const nav=document.getElementById('nav'),list=document.getElementById('list');
@@ -101,8 +101,8 @@ D.forEach(([y,a,b,s,lm,pd])=>{
     <div class="info"><div class="yr">${y}</div>
       <div class="txt"><p class="lm">📍 ${lm}</p><p class="pd">🏆 ${pd}</p></div>
       <div class="meta"><label><input type="checkbox" data-y="${y}"> Found</label><a href="https://x.com/asher476music/status/${s}" target="_blank" rel="noopener">post ↗</a></div></div>
-    <figure><button data-full="${img(a,'large')}" data-cap="${y}: where to go"><img loading="lazy" src="${img(a,'small')}" alt="${y} landmark"></button><figcaption>WHERE</figcaption></figure>
-    <figure><button data-full="${img(b,'large')}" data-cap="${y}: the podium"><img loading="lazy" src="${img(b,'small')}" alt="${y} podium close-up"></button><figcaption>PODIUM</figcaption></figure>
+    <figure><button data-full="${img(y,'where')}" data-cap="${y}: where to go"><img loading="lazy" src="${img(y,'where',1)}" alt="${y} landmark"></button><figcaption>WHERE</figcaption></figure>
+    <figure><button data-full="${img(y,'podium')}" data-cap="${y}: the podium"><img loading="lazy" src="${img(y,'podium',1)}" alt="${y} podium close-up"></button><figcaption>PODIUM</figcaption></figure>
   </section>`);
 });
 const pb=document.getElementById('pb'),pc=document.getElementById('pc');
