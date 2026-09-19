@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hunt Podium Finder</title>
+<meta name="description" content="Every secret item podium location in The Hunt: Roblox 20, year by year.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏆</text></svg>">
+<style>
+:root{--bg:#0f1115;--card:#171a21;--line:#262b35;--text:#eef0f4;--muted:#8f97a6;--accent:#ffcf3f;--ink:#1a1400;--ok:#3ddc84}
+@media (prefers-color-scheme: light){:root{--bg:#f4f5f7;--card:#fff;--line:#e2e5ea;--text:#15171c;--muted:#5e6675;--accent:#e0a800;--ink:#1a1400;--ok:#1a9e55}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+header{padding:16px 0 10px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px}
+h1{font-size:20px;margin:0;letter-spacing:-.01em}
+.sub{color:var(--muted);font-size:13px}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 0}
+.bar .wrap{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.years{display:flex;gap:4px;flex-wrap:wrap;flex:1;min-width:0}
+.years a{padding:3px 7px;border-radius:6px;border:1px solid var(--line);color:var(--text);text-decoration:none;font-weight:600;font-size:12px;font-variant-numeric:tabular-nums}
+.years a:hover{border-color:var(--accent)}
+.years a.done{background:var(--ok);border-color:var(--ok);color:#04150b}
+.years span{padding:3px 7px;font-size:12px;color:var(--muted);text-decoration:line-through;opacity:.6}
+.prog{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);white-space:nowrap}
+.prog i{display:block;width:90px;height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.prog i b{display:block;height:100%;background:var(--ok);width:0;transition:width .2s}
+.hide{display:flex;gap:5px;align-items:center;font-size:12px;color:var(--muted);cursor:pointer}
+main{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px 0 16px}
+@media (max-width:900px){main{grid-template-columns:1fr}}
+@media (max-width:640px){.years{flex:1 1 100%;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.years::-webkit-scrollbar{display:none}.years a,.years span{flex:none}}
+.row{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px;scroll-margin-top:60px}
+.row.found{opacity:.45}
+body.hidefound .row.found{display:none}
+.info{grid-column:1/-1;display:flex;gap:10px;align-items:flex-start}
+.yr{font-size:18px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--accent);line-height:1.1;min-width:44px}
+.txt{flex:1;min-width:0}
+.txt p{margin:0}
+.txt .lm{font-weight:600}
+.txt .pd{color:var(--muted)}
+.txt .pd b{color:var(--text);font-weight:600}
+.meta{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.meta label{display:flex;gap:4px;align-items:center;font-size:12px;color:var(--muted);cursor:pointer;white-space:nowrap}
+.meta input{width:16px;height:16px;accent-color:var(--ok);margin:0}
+.meta a{font-size:11px;color:var(--muted)}
+figure{margin:0;position:relative}
+figure button{all:unset;cursor:zoom-in;display:block;width:100%;aspect-ratio:16/10;border-radius:6px;overflow:hidden;background:#000}
+figure img{width:100%;height:100%;object-fit:cover;display:block}
+figcaption{position:absolute;left:4px;top:4px;background:rgba(0,0,0,.7);color:#fff;font-size:10px;font-weight:600;padding:1px 5px;border-radius:4px;pointer-events:none}
+footer{color:var(--muted);font-size:12px;padding:0 0 24px}
+footer a,.sub a{color:var(--accent)}
+dialog{border:0;padding:0;background:transparent;max-width:96vw;max-height:96vh}
+dialog::backdrop{background:rgba(0,0,0,.88)}
+dialog img{max-width:96vw;max-height:88vh;display:block;border-radius:6px}
+dialog p{color:#fff;text-align:center;margin:6px 0 0;font-size:13px}
+</style>
+</head>
+<body>
+<header class="wrap">
+  <h1>🏆 The Hunt: Roblox 20 · Secret Podiums</h1>
+  <span class="sub">17 years · wide shot = where to go, close-up = the podium · tap to enlarge · via <a href="https://x.com/asher476music/status/2100837704502276137" target="_blank" rel="noopener">@asher476music</a></span>
+</header>
+<div class="bar"><div class="wrap">
+  <div class="years" id="nav"></div>
+  <div class="prog"><i><b id="pb"></b></i><span id="pc">0/17</span></div>
+  <label class="hide"><input type="checkbox" id="hf"> Hide found</label>
+</div></div>
+<main class="wrap" id="list"></main>
+<footer class="wrap">
+  Screenshots by <a href="https://x.com/asher476music" target="_blank" rel="noopener">@asher476music</a> (<a href="https://x.com/asher476music/status/2100837704502276137" target="_blank" rel="noopener">thread</a>). The written hints are based on the screenshots, so check the photos if something doesn't match. The thread skips 2015, 2021 and 2023. Progress is saved in this browser only.
+</footer>
+<dialog id="lb" onclick="this.close()"><img id="lbimg" alt=""><p id="lbcap"></p></dialog>
+<script>
+// [year, wide shot, close-up, post id, landmark, podium spot]
+const D=[
+[2006,"HSesqZZbwAAvTry","HSesvuAb0AAfrUs","2100837704502276137","Grey stone building topped by a yellow pillared temple, with a purple staircase.","<b>Inside</b> a dark room within the grey building. Look down through the opening."],
+[2007,"HSetCfHa0AA-jU6","HSetGXdbwAA0Zct","2100838089006690306","Tall brown rock cliff with wooden stairs up the side.","On a <b>ledge on the outer face</b> of the cliff, over the sky drop."],
+[2008,"HSetYyEbkAApzpk","HSetev0aQAAOavw","2100838502581817811","Grey castle with a red Roblox flag.","<b>Upstairs inside the castle</b>, in the open room above the red base."],
+[2009,"HSetzbBbQAA4dVy","HSet842aQAAPSeE","2100839024361717858","Red-and-yellow scaffold building on a grassy hill.","On the <b>roof</b> of the scaffold building."],
+[2010,"HSeuMgracAARN_i","HSeuSESacAAPHFJ","2100839388758556973","Brown wooden shop with a campfire out front and a round sign.","<b>Inside the shop</b>, by the table."],
+[2011,"HSev9W9bsAAJr4Z","HSewAetb0AAyVsN","2100841283434766793","Tree next to a tall grey building with red trim.","<b>Hidden in the tree's leaves</b>. Climb up into the canopy."],
+[2012,"HSezKEnaAAAx-UJ","HSezMNXaAAARxzy","2100844778216890476","White buildings on a cliff above green trees.","<b>Inside a white room</b> in the buildings, near the doorway."],
+[2013,"HSezgNcbYAA1DWZ","HSezmBKbMAAobmL","2100845221529727313","Helipad with a big yellow \"H\" in front of a green-roofed building.","In a <b>dark nook under wooden planks</b> nearby."],
+[2014,"HSez_Jfa8AAXV4o","HSe0BghawAACAXL","2100845692956844076","Brown wooden tunnel opening onto grass.","In the <b>room behind the window</b> with the orange-lit floor."],
+[2016,"HSe09zmaEAElV47","HSe1Cyia4AA4TzB","2100846814891245659","School hallway with blue lockers and a loose ceiling panel.","At the <b>end of a dark brick corridor</b> hidden behind the hallway."],
+[2017,"HSe1iXoasAA4JsL","HSe1mWraYAALK-1","2100847427154739655","Tall brown brick tower with a lit window, among pine trees.","On the <b>top of the tower</b>, on the octagonal roof."],
+[2018,"HSe2JQoboAAgDgF","HSe2OBOakAAS7mE","2100848109601669602","Stone jungle temple with a giant head statue and a central staircase.","On a <b>dark stone ledge</b> along the temple wall."],
+[2019,"HSe21QibAAA-xh2","HSe29KnbQAAQLXJ","2100848917609140336","Red tower with a big Roblox \"R\" logo.","On the <b>orange platform at the top</b> of the tower."],
+[2020,"HSe3h_HaQAArra5","HSe3jo5aEAAxDnl","2100849585082286133","Rainbow-striped tower.","On the <b>pink rim at the very top</b>."],
+[2022,"HSe4UwtagAAO8O3","HSe4YhbaAAAaAio","2100850488250106065","Ornate brown mansion with palm trees.","In the <b>grassy garden beside the mansion</b>, behind the palms."],
+[2024,"HSe5PP-bcAAxeov","HSe5UjLacAA-R0W","2100851517448470858","Stage with lighting trusses and a slanted white wall.","In a <b>narrow white corridor</b> behind the wall panels."],
+[2025,"HSe5jmqbEAAqeiZ","HSe5tgAbkAAMbEJ","2100851948396355812","Pine forest with grey boulders.","In the grass <b>under the big tree and rock overhang</b>."]];
+const img=(id,s)=>`https://pbs.twimg.com/media/${id}?format=jpg&name=${s}`;
+let found={};try{found=JSON.parse(localStorage.getItem('podiums')||'{}')}catch(e){}
+const save=()=>{try{localStorage.setItem('podiums',JSON.stringify(found))}catch(e){}};
+const nav=document.getElementById('nav'),list=document.getElementById('list');
+const have=new Set(D.map(d=>d[0]));
+for(let y=2006;y<=2025;y++){ if(!have.has(y)) nav.insertAdjacentHTML('beforeend',`<span title="Not in thread">${y}</span>`); else nav.insertAdjacentHTML('beforeend',`<a href="#y${y}" id="n${y}">${y}</a>`); }
+D.forEach(([y,a,b,s,lm,pd])=>{
+  list.insertAdjacentHTML('beforeend',`<section class="row" id="y${y}">
+    <div class="info"><div class="yr">${y}</div>
+      <div class="txt"><p class="lm">📍 ${lm}</p><p class="pd">🏆 ${pd}</p></div>
+      <div class="meta"><label><input type="checkbox" data-y="${y}"> Found</label><a href="https://x.com/asher476music/status/${s}" target="_blank" rel="noopener">post ↗</a></div></div>
+    <figure><button data-full="${img(a,'large')}" data-cap="${y}: where to go"><img loading="lazy" src="${img(a,'small')}" alt="${y} landmark"></button><figcaption>WHERE</figcaption></figure>
+    <figure><button data-full="${img(b,'large')}" data-cap="${y}: the podium"><img loading="lazy" src="${img(b,'small')}" alt="${y} podium close-up"></button><figcaption>PODIUM</figcaption></figure>
+  </section>`);
+});
+const pb=document.getElementById('pb'),pc=document.getElementById('pc');
+const paint=y=>{const on=!!found[y];document.getElementById('y'+y).classList.toggle('found',on);document.getElementById('n'+y).classList.toggle('done',on);
+  const n=D.filter(d=>found[d[0]]).length;pc.textContent=`${n}/${D.length}`;pb.style.width=(n/D.length*100)+'%'};
+document.querySelectorAll('.meta input').forEach(c=>{const y=c.dataset.y;c.checked=!!found[y];paint(y);
+  c.onchange=()=>{found[y]=c.checked;save();paint(y)}});
+const hf=document.getElementById('hf');
+try{hf.checked=localStorage.getItem('hidefound')==='1'}catch(e){}
+const applyHide=()=>{document.body.classList.toggle('hidefound',hf.checked);try{localStorage.setItem('hidefound',hf.checked?'1':'0')}catch(e){}};
+hf.onchange=applyHide;applyHide();
+const lb=document.getElementById('lb');
+document.querySelectorAll('figure button').forEach(b=>b.onclick=()=>{lbimg.src=b.dataset.full;lbcap.textContent=b.dataset.cap;lb.showModal()});
+</script>
+</body>
+</html>
